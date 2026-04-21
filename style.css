@@ -1,0 +1,119 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+.page { display: none; min-height: 100vh; padding: 20px; }
+.page.active { display: flex; align-items: center; justify-content: center; }
+
+/* 开始页 */
+.start-container {
+  text-align: center; max-width: 500px; padding: 40px 30px;
+  background: rgba(255,255,255,0.95); border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.logo { font-size: 72px; margin-bottom: 16px; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+.start-container h1 { font-size: 28px; color: #333; margin-bottom: 12px; }
+.subtitle { font-size: 16px; color: #764ba2; font-weight: 600; margin-bottom: 12px; }
+.desc { font-size: 14px; color: #888; line-height: 1.6; margin-bottom: 32px; }
+.hint { margin-top: 16px; font-size: 13px; color: #aaa; }
+
+/* 按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none;
+  padding: 14px 36px; font-size: 16px; border-radius: 50px; cursor: pointer;
+  transition: all 0.3s; font-weight: 600;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(118,75,162,0.4); }
+.btn-secondary {
+  background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.5);
+  padding: 12px 28px; font-size: 15px; border-radius: 50px; cursor: pointer;
+  transition: all 0.3s; font-weight: 500; backdrop-filter: blur(5px);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.35); }
+.btn-outline {
+  background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.4);
+  padding: 10px 24px; font-size: 14px; border-radius: 50px; cursor: pointer; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: #fff; color: #fff; }
+
+/* 答题页 */
+.quiz-container { width: 100%; max-width: 600px; }
+.progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #ffd700, #ff6b6b); border-radius: 4px; transition: width 0.4s ease; width: 0%; }
+.progress-text { text-align: center; color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 20px; }
+.question-card {
+  background: rgba(255,255,255,0.95); border-radius: 20px; padding: 32px 24px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.12); animation: slideIn 0.4s ease;
+}
+@keyframes slideIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.question-card h2 { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 24px; text-align: center; }
+.options { display: flex; flex-direction: column; gap: 12px; }
+.option-btn {
+  background: #f8f9ff; border: 2px solid #e8eaff; border-radius: 14px;
+  padding: 14px 18px; font-size: 15px; line-height: 1.5; color: #444;
+  cursor: pointer; transition: all 0.25s; text-align: left;
+}
+.option-btn:hover { background: #eef0ff; border-color: #667eea; transform: translateX(4px); }
+.option-btn:active { background: #667eea; color: white; border-color: #667eea; }
+
+/* 结果页 - 卡片 */
+.result-container { max-width: 440px; width: 100%; text-align: center; }
+.personality-card {
+  background: #fff; border-radius: 24px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: cardIn 0.6s ease;
+  position: relative;
+}
+@keyframes cardIn { from{opacity:0;transform:scale(0.9) translateY(30px)} to{opacity:1;transform:scale(1) translateY(0)} }
+.card-header {
+  padding: 30px 20px 20px; position: relative; display: flex;
+  flex-direction: column; align-items: center;
+}
+.card-avatar { width: 100px; height: 100px; margin-bottom: 8px; }
+.card-avatar svg { width: 100%; height: 100%; }
+.card-emoji { font-size: 32px; }
+.card-body { padding: 0 24px 20px; }
+.card-body h1 { font-size: 22px; color: #333; margin-bottom: 8px; }
+.card-tag {
+  display: inline-block; padding: 4px 16px; border-radius: 20px;
+  font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 16px;
+}
+.card-desc {
+  font-size: 14px; line-height: 1.8; color: #666; text-align: left;
+  padding: 16px; background: #f8f9ff; border-radius: 12px; margin-top: 12px;
+}
+.card-footer { padding: 0 24px 24px; }
+.card-stat {
+  text-align: left; padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.card-stat:last-child { border-bottom: none; }
+.stat-label { font-size: 13px; font-weight: 600; color: #333; }
+.card-stat p, .card-match p { font-size: 13px; color: #888; line-height: 1.6; margin-top: 4px; }
+.card-match-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 12px; }
+.card-match { text-align: left; }
+.card-watermark {
+  text-align: center; padding: 12px; font-size: 11px;
+  color: #ccc; border-top: 1px solid #f0f0f0;
+}
+
+/* 结果操作按钮 */
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; align-items: center; }
+.share-toast {
+  margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.9);
+  opacity: 0; transition: opacity 0.3s;
+}
+.share-toast.show { opacity: 1; }
+
+/* 响应式 */
+@media (max-width: 480px) {
+  .start-container h1 { font-size: 24px; }
+  .question-card h2 { font-size: 16px; }
+  .option-btn { font-size: 14px; padding: 12px 14px; }
+  .card-body h1 { font-size: 20px; }
+  .card-desc { font-size: 13px; }
+  .result-container { max-width: 100%; }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋爱人格测试 - 你是哪种恋爱动物？</title>
+    <meta name="description" content="60道情景题，24种恋爱人格，揭秘你的真实恋爱观">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 开始页 -->
+        <div id="start-page" class="page active">
+            <div class="start-container">
+                <div class="logo">💘</div>
+                <h1>你是哪种恋爱人格？</h1>
+                <p class="subtitle">60道情景题，揭秘你的真实恋爱观</p>
+                <p class="desc">不是MBTI那套字母游戏，而是基于当下真实恋爱生态的24种人格分类。</p>
+                <button id="start-btn" class="btn-primary" onclick="startQuiz()">开始测试</button>
+                <p class="hint">⏱ 大约需要 8-10 分钟</p>
+            </div>
+        </div>
+
+        <!-- 答题页 -->
+        <div id="quiz-page" class="page">
+            <div class="quiz-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="progress-text" class="progress-text">1 / 60</p>
+                <div id="question-card" class="question-card">
+                    <h2 id="question-text"></h2>
+                    <div id="options" class="options"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果页 -->
+        <div id="result-page" class="page">
+            <div class="result-container">
+                <!-- 人格卡片 -->
+                <div id="personality-card" class="personality-card">
+                    <div class="card-header">
+                        <div id="card-avatar" class="card-avatar"></div>
+                        <div id="card-emoji" class="card-emoji"></div>
+                    </div>
+                    <div class="card-body">
+                        <h1 id="card-name"></h1>
+                        <span id="card-subtitle" class="card-tag"></span>
+                        <p id="card-desc" class="card-desc"></p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-stat">
+                            <span class="stat-label">✅ 恋爱优势</span>
+                            <p id="card-pros"></p>
+                        </div>
+                        <div class="card-stat">
+                            <span class="stat-label">⚠️ 踩雷预警</span>
+                            <p id="card-cons"></p>
+                        </div>
+                        <div class="card-match-row">
+                            <div class="card-match">
+                                <span class="stat-label">💕 最佳CP</span>
+                                <p id="card-match"></p>
+                            </div>
+                            <div class="card-match">
+                                <span class="stat-label">💔 冤家</span>
+                                <p id="card-clash"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-watermark">恋爱人格测试</div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-primary" onclick="saveCardImage()">📷 保存卡片图片</button>
+                    <button class="btn-secondary" onclick="copyShareLink()">🔗 复制分享链接</button>
+                    <button class="btn-outline" onclick="restartQuiz()">🔄 重新测试</button>
+                </div>
+                <p id="share-toast" class="share-toast"></p>
+            </div>
+        </div>
+    </div>
+    <!-- 隐藏的canvas用于生成图片 -->
+    <canvas id="share-canvas" style="display:none;"></canvas>
+    <script src="data.js"></script>
+    <script src="avatars.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
