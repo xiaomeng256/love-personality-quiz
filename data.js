@@ -1,4 +1,4 @@
-// 24种恋爱人格定义
+﻿// 24种恋爱人格定义
 const personalities = {
   "rush": {
     name: "为爱冲锋的敢死队长",
@@ -242,365 +242,440 @@ const personalities = {
   }
 };
 
+// 60道题 - 完全平衡版：每种人格恰好10次主要得分(3分)和10次次要得分(1分)，总分40
+
 const questions = [
-  { q: "周五晚上，对象突然说想见你，但你已经约了朋友打游戏。你会？", opts: [
-    { text: "立刻取消朋友局，飞奔去见对象", scores: { rush: 3, alarm: 1 } },
-    { text: "跟对象说改明天吧，今晚有安排了", scores: { sober: 3, roommate: 1 } },
-    { text: "问问朋友能不能带对象一起来", scores: { show: 2, drama: 1 } },
-    { text: "纠结半天，最后两边都去一会儿", scores: { pleaser: 3 } }
+  // === Round 1 (Q01-Q06) ===
+  // Q01 P:rush,roommate,alarm,hunter S:loop,vanish,detective,flirt
+  { q: "周五晚上对象突然说想见你，但你已经约了朋友。你会？", opts: [
+    { text: "秒回'来了'，朋友那边随便编个理由取消", scores: { rush: 3, loop: 1 } },
+    { text: "跟TA说改天吧，今晚有自己的安排", scores: { roommate: 3, parent: 1 } },
+    { text: "纠结到胃疼，一直刷消息怕TA不高兴", scores: { alarm: 3, detective: 1 } },
+    { text: "回一句'看心情'，享受TA着急的样子", scores: { hunter: 3, flirt: 1 } }
   ]},
-  { q: "你发了条消息给对象，过了两个小时还没回。你的第一反应是？", opts: [
-    { text: "开始翻TA的朋友圈看是不是在忙", scores: { alarm: 3, detective: 1 } },
-    { text: "没啥感觉，可能在忙吧", scores: { buddha: 3, roommate: 1 } },
-    { text: "有点不爽但不会说，默默等着", scores: { silent: 2, tsundere: 1 } },
-    { text: "发第二条：你死了吗？？？", scores: { rush: 2, alarm: 1 } }
+  // Q02 P:sober,slowcook,buddha,money S:gym,ideal,roommate,purist
+  { q: "朋友问你'什么时候适合谈恋爱'，你的回答是？", opts: [
+    { text: "先把自己活明白了再说，别为了恋爱丢了自己", scores: { sober: 3, detective: 1 } },
+    { text: "不急，慢慢来，对的人总会出现的", scores: { slowcook: 3, parent: 1 } },
+    { text: "随缘吧，有就有没有也无所谓", scores: { buddha: 3, roommate: 1 } },
+    { text: "等事业稳定了再考虑，现在没精力", scores: { money: 3, purist: 1 } }
   ]},
-  { q: "理想的约会方式是？", opts: [
-    { text: "精心策划的浪漫晚餐+看星星", scores: { drama: 3, daydream: 1 } },
-    { text: "各自带本书去咖啡馆，安静待一下午", scores: { roommate: 3, sober: 1 } },
-    { text: "一起去密室逃脱或者游乐园，要刺激", scores: { hunter: 3, flirt: 1 } },
-    { text: "在家做饭看电影，舒服就行", scores: { parent: 2, slowcook: 1 } }
+  // Q03 P:tsundere,daydream,drama,silent S:alarm,rush,show,vanish
+  { q: "对象突然发消息说'我好想你'，你的第一反应？", opts: [
+    { text: "回一句'有病吧'，但嘴角已经翘到天花板", scores: { tsundere: 3, detective: 1 } },
+    { text: "脑子里瞬间放起了偶像剧BGM", scores: { daydream: 3, parent: 1 } },
+    { text: "立刻回一大段情话，还要配上爱心表情", scores: { drama: 3, show: 1 } },
+    { text: "看到了但不知道怎么回，先放着", scores: { silent: 3, roommate: 1 } }
   ]},
+  // Q04 P:vanish,pleaser,detective,flirt S:buddha,parent,cliff,hunter
   { q: "对象跟异性朋友单独吃饭，你的反应？", opts: [
-    { text: "表面说没事，心里已经开始查对方是谁了", scores: { detective: 3, alarm: 1 } },
-    { text: "完全OK，我也有异性朋友啊", scores: { sober: 3, buddha: 1 } },
-    { text: "嘴上说随便你，但接下来三天阴阳怪气", scores: { tsundere: 2, silent: 2 } },
-    { text: "直接说不太舒服，希望下次能一起", scores: { rush: 2, alarm: 1 } }
+    { text: "不太想管，TA的社交是TA的事", scores: { vanish: 3, roommate: 1 } },
+    { text: "说没关系你去吧，心里其实不太舒服", scores: { pleaser: 3, parent: 1 } },
+    { text: "表面淡定，回家就翻TA的聊天记录", scores: { detective: 3, cliff: 1 } },
+    { text: "无所谓，反正我也有别的朋友可以约", scores: { flirt: 3, hunter: 1 } }
   ]},
-  { q: "你觉得恋爱中最重要的是什么？", opts: [
-    { text: "灵魂深处的共鸣和理解", scores: { purist: 3, ideal: 1 } },
-    { text: "持续的心动和激情", scores: { hunter: 2, drama: 2 } },
-    { text: "稳定的陪伴和安全感", scores: { alarm: 2, parent: 2 } },
-    { text: "互相尊重彼此的独立空间", scores: { sober: 2, roommate: 2 } }
+  // Q05 P:purist,newbie,gym,cliff S:daydream,slowcook,sober,silent
+  { q: "有人对你表示好感，但聊了几次发现三观不太合。你会？", opts: [
+    { text: "果断放弃，精神不合拍一切免谈", scores: { purist: 3, daydream: 1 } },
+    { text: "有点可惜但不知道怎么拒绝，拖着", scores: { newbie: 3, slowcook: 1 } },
+    { text: "反思一下是不是自己沟通方式有问题", scores: { gym: 3, money: 1 } },
+    { text: "直接断了联系，不浪费彼此时间", scores: { cliff: 3, silent: 1 } }
   ]},
-  { q: "分手后你通常会怎么做？", opts: [
-    { text: "删除所有联系方式，彻底断干净", scores: { cliff: 3, sober: 1 } },
-    { text: "忍不住偷偷看前任的社交动态", scores: { rush: 2, daydream: 1 } },
-    { text: "过几天就开始想复合了", scores: { loop: 3, alarm: 1 } },
-    { text: "认真复盘这段关系，总结经验", scores: { gym: 3 } }
+  // Q06 P:loop,show,parent,ideal S:rush,drama,alarm,purist
+  { q: "分手后你最可能做的事是？", opts: [
+    { text: "反复翻看聊天记录，忍不住想联系TA", scores: { loop: 3, detective: 1 } },
+    { text: "发一条意味深长的朋友圈，让TA看到", scores: { show: 3, hunter: 1 } },
+    { text: "担心TA一个人过不好，偷偷关注TA的动态", scores: { parent: 3, tsundere: 1 } },
+    { text: "虽然难过但不将就，该放手就放手", scores: { ideal: 3, purist: 1 } }
   ]},
-  { q: "对象说'我觉得我们需要谈谈'，你的第一反应？", opts: [
-    { text: "心跳加速，完了完了要分手了", scores: { alarm: 3, rush: 1 } },
-    { text: "好啊，有什么问题说清楚就好", scores: { sober: 3, gym: 1 } },
-    { text: "假装没看到这条消息", scores: { vanish: 3, silent: 1 } },
-    { text: "先想好怎么让对方消气", scores: { pleaser: 3 } }
+  // === Round 2 (Q07-Q12) ===
+  // Q07 P:rush,hunter,drama,newbie S:daydream,flirt,show,pleaser
+  { q: "你理想中的表白方式是？", opts: [
+    { text: "管不了那么多了，冲上去直接说喜欢你", scores: { rush: 3, daydream: 1 } },
+    { text: "制造一个完美的偶遇，让心动自然发生", scores: { hunter: 3, flirt: 1 } },
+    { text: "精心策划一场浪漫的表白仪式", scores: { drama: 3, show: 1 } },
+    { text: "写一封信偷偷塞给TA，然后紧张到不敢看TA", scores: { newbie: 3, pleaser: 1 } }
   ]},
-  { q: "你会在朋友圈晒恋爱日常吗？", opts: [
-    { text: "当然！恋爱不晒等于没谈", scores: { show: 3, drama: 1 } },
-    { text: "偶尔晒一下，纪念日什么的", scores: { slowcook: 1, parent: 1 } },
-    { text: "从来不晒，感情是两个人的事", scores: { vanish: 2, sober: 1 } },
-    { text: "想晒但怕被说秀恩爱", scores: { newbie: 2, tsundere: 1 } }
+  // Q08 P:alarm,buddha,sober,tsundere S:detective,flirt,money,silent
+  { q: "对象给你发了一条很敷衍的回复，就一个'嗯'。你会？", opts: [
+    { text: "反复看这个字，分析TA是不是在生气", scores: { alarm: 3, detective: 1 } },
+    { text: "没在意，可能就是在忙吧", scores: { buddha: 3, flirt: 1 } },
+    { text: "直接问TA是不是有什么事，别藏着掖着", scores: { sober: 3, money: 1 } },
+    { text: "也回一个'哦'，看谁更敷衍", scores: { tsundere: 3, silent: 1 } }
   ]},
-  { q: "暧昧期对方突然变冷淡了，你会？", opts: [
-    { text: "主动问清楚怎么了", scores: { rush: 2, sober: 1 } },
-    { text: "也跟着冷淡，看谁先撑不住", scores: { tsundere: 2, flirt: 2 } },
-    { text: "疯狂分析是不是自己哪里做错了", scores: { alarm: 3, daydream: 1 } },
-    { text: "算了，缘分到此为止吧", scores: { buddha: 2, cliff: 2 } }
+  // Q09 P:money,roommate,pleaser,cliff S:sober,buddha,rush,ideal
+  { q: "对象抱怨你陪TA的时间太少了。你会？", opts: [
+    { text: "我也没办法啊，最近项目太忙了", scores: { money: 3, slowcook: 1 } },
+    { text: "我觉得现在的节奏挺好的，各自有空间", scores: { roommate: 3, buddha: 1 } },
+    { text: "对不起，我以后尽量多陪你", scores: { pleaser: 3, show: 1 } },
+    { text: "如果你觉得不够，那可能我们不太合适", scores: { cliff: 3, parent: 1 } }
   ]},
-  { q: "你对'恋爱搭子'这个概念怎么看？", opts: [
-    { text: "挺好的，轻松没负担", scores: { roommate: 3, buddha: 1 } },
-    { text: "不理解，要么认真谈要么别谈", scores: { ideal: 2, purist: 2 } },
-    { text: "可以先从搭子开始慢慢发展", scores: { slowcook: 3, flirt: 1 } },
-    { text: "我就是那个把搭子处成对象的人", scores: { rush: 2, hunter: 1 } }
+  // Q10 P:slowcook,daydream,detective,gym S:newbie,drama,alarm,money
+  { q: "你暗恋一个人三个月了还没表白，最可能的原因是？", opts: [
+    { text: "还在慢慢了解TA，不想太着急", scores: { slowcook: 3, newbie: 1 } },
+    { text: "脑子里已经演完了从表白到结婚的全部剧情", scores: { daydream: 3, drama: 1 } },
+    { text: "还在观察TA的社交圈，想确认TA是不是单身", scores: { detective: 3, tsundere: 1 } },
+    { text: "在总结之前的经验，想找到最好的表白方式", scores: { gym: 3, money: 1 } }
   ]},
-  { q: "对象加班到很晚，你会？", opts: [
-    { text: "给TA点个外卖送到公司", scores: { parent: 3, rush: 1 } },
-    { text: "发条消息说早点休息，然后该干嘛干嘛", scores: { sober: 2, roommate: 1 } },
-    { text: "怀疑是不是真的在加班", scores: { detective: 3 } },
-    { text: "等TA回来，不管多晚", scores: { rush: 2, alarm: 1 } }
+  // Q11 P:silent,parent,flirt,loop S:tsundere,rush,hunter,alarm
+  { q: "你和对象大吵了一架，TA摔门走了。你会？", opts: [
+    { text: "不追，让彼此冷静一下再说", scores: { silent: 3, tsundere: 1 } },
+    { text: "先给TA发条消息问安全到家没", scores: { parent: 3, show: 1 } },
+    { text: "没追，但发了个暧昧的表情包试探", scores: { flirt: 3, hunter: 1 } },
+    { text: "受不了分开的感觉，马上打电话求和", scores: { loop: 3, detective: 1 } }
   ]},
-  { q: "你怎么看待恋爱中的仪式感？", opts: [
-    { text: "超级重要！每个纪念日都要过", scores: { drama: 3, show: 1 } },
-    { text: "偶尔有就行，天天搞太累了", scores: { roommate: 2, buddha: 1 } },
-    { text: "心意到了就好，形式不重要", scores: { sober: 2, slowcook: 1 } },
-    { text: "我就是那个会准备惊喜的人", scores: { parent: 2, drama: 1 } }
+  // Q12 P:vanish,show,ideal,purist S:roommate,alarm,cliff,slowcook
+  { q: "有人跟你表白了，但你对TA只有好感还没到喜欢。你会？", opts: [
+    { text: "有点抗拒，觉得关系变了会不自在", scores: { vanish: 3, roommate: 1 } },
+    { text: "先答应试试，然后发朋友圈官宣", scores: { show: 3, tsundere: 1 } },
+    { text: "拒绝，没有心动的感觉不想勉强", scores: { ideal: 3, pleaser: 1 } },
+    { text: "先深入聊聊三观，看精神上合不合", scores: { purist: 3, slowcook: 1 } }
   ]},
-  { q: "如果对象的朋友不太喜欢你，你会？", opts: [
-    { text: "努力让他们喜欢我", scores: { pleaser: 3, show: 1 } },
-    { text: "无所谓，我又不是跟他们谈恋爱", scores: { sober: 2, buddha: 1 } },
-    { text: "有点在意，会跟对象聊聊", scores: { alarm: 2, rush: 1 } },
-    { text: "暗暗记住，以后少来往就是了", scores: { silent: 2, tsundere: 1 } }
+  // === Round 3 (Q13-Q18) ===
+  // Q13 P:hunter,gym,slowcook,drama S:rush,sober,ideal,daydream
+  { q: "你和对象在一起两年了，感觉激情消退了。你会？", opts: [
+    { text: "开始觉得索然无味，怀念刚在一起时的心动", scores: { hunter: 3, show: 1 } },
+    { text: "跟对方认真聊聊，一起想办法改善", scores: { gym: 3, money: 1 } },
+    { text: "觉得这很正常，平淡才是长久的", scores: { slowcook: 3, newbie: 1 } },
+    { text: "策划一场浪漫约会，主动制造新鲜感", scores: { drama: 3, daydream: 1 } }
   ]},
-  { q: "你觉得多久确认恋爱关系比较合适？", opts: [
-    { text: "感觉对了就在一起，不用等太久", scores: { rush: 2, hunter: 2 } },
-    { text: "至少认识半年以上", scores: { slowcook: 3, ideal: 1 } },
-    { text: "看缘分，水到渠成", scores: { buddha: 2, slowcook: 1 } },
-    { text: "其实不确认关系也挺好的", scores: { flirt: 3, roommate: 1 } }
+  // Q14 P:alarm,tsundere,buddha,detective S:loop,silent,vanish,cliff
+  { q: "对象说'我今天跟前任偶遇了'。你的反应？", opts: [
+    { text: "心跳加速，追问了一百个细节", scores: { alarm: 3, flirt: 1 } },
+    { text: "嘴上说'关我什么事'，心里已经炸了", scores: { tsundere: 3, silent: 1 } },
+    { text: "哦，然后呢？继续吃饭", scores: { buddha: 3, vanish: 1 } },
+    { text: "默默记下来，回头去查前任的社交账号", scores: { detective: 3, cliff: 1 } }
   ]},
-  { q: "吵架的时候你通常是什么状态？", opts: [
-    { text: "据理力争，一定要说清楚", scores: { sober: 2, detective: 1 } },
-    { text: "先不说话，冷静一下再谈", scores: { silent: 3, vanish: 1 } },
-    { text: "先道歉，不管是不是自己的错", scores: { pleaser: 3, parent: 1 } },
-    { text: "吵到一半突然觉得算了不想吵了", scores: { cliff: 2, buddha: 1 } }
+  // Q15 P:purist,newbie,money,cliff S:ideal,vanish,gym,sober
+  { q: "第一次约会，你最看重什么？", opts: [
+    { text: "能不能聊到一起去，有没有精神共鸣", scores: { purist: 3, ideal: 1 } },
+    { text: "好紧张，希望自己别说错话就行", scores: { newbie: 3, vanish: 1 } },
+    { text: "对方有没有上进心和清晰的人生规划", scores: { money: 3, gym: 1 } },
+    { text: "第一印象不行就不会有第二次了", scores: { cliff: 3, slowcook: 1 } }
   ]},
+  // Q16 P:pleaser,show,roommate,silent S:parent,drama,sober,tsundere
+  { q: "对象送你一个你完全不喜欢的礼物。你会？", opts: [
+    { text: "开心收下，TA有这份心就够了", scores: { pleaser: 3, parent: 1 } },
+    { text: "拍照发朋友圈感谢对象的礼物", scores: { show: 3, drama: 1 } },
+    { text: "委婉说谢谢，下次可以送别的", scores: { roommate: 3, sober: 1 } },
+    { text: "不说话，但心里已经很不爽了", scores: { silent: 3, tsundere: 1 } }
+  ]},
+  // Q17 P:rush,daydream,parent,ideal S:alarm,purist,pleaser,cliff
   { q: "你会因为恋爱推迟自己的职业规划吗？", opts: [
-    { text: "会，爱情比事业重要", scores: { rush: 3, alarm: 1 } },
-    { text: "绝对不会，事业第一", scores: { money: 3, sober: 1 } },
-    { text: "看情况，能兼顾最好", scores: { gym: 2, slowcook: 1 } },
-    { text: "没想过这个问题", scores: { buddha: 2, newbie: 1 } }
+    { text: "会，爱情比事业重要，大不了以后再拼", scores: { rush: 3, tsundere: 1 } },
+    { text: "会幻想一种两全其美的完美方案", scores: { daydream: 3, purist: 1 } },
+    { text: "看对方需不需要我，TA需要我就推迟", scores: { parent: 3, pleaser: 1 } },
+    { text: "绝对不会，我有自己的人生标准", scores: { ideal: 3, cliff: 1 } }
   ]},
-  { q: "对象送你一个你不喜欢的礼物，你会？", opts: [
-    { text: "开心收下，心意最重要", scores: { pleaser: 2, parent: 1 } },
-    { text: "委婉地说下次可以送别的", scores: { sober: 3 } },
-    { text: "嘴上说不喜欢，但偷偷收好", scores: { tsundere: 3 } },
-    { text: "发朋友圈感谢对象的礼物", scores: { show: 2, drama: 1 } }
+  // Q18 P:loop,vanish,flirt,sober S:rush,buddha,hunter,gym
+  { q: "分手三个月了，前任突然给你发消息说想你了。你会？", opts: [
+    { text: "心软了，开始回忆在一起的美好时光", scores: { loop: 3, newbie: 1 } },
+    { text: "假装没看到，不想再卷入这段关系", scores: { vanish: 3, buddha: 1 } },
+    { text: "回一句'是吗'，享受被想念的感觉但不给明确回应", scores: { flirt: 3, hunter: 1 } },
+    { text: "冷静想想当初为什么分手，不能重蹈覆辙", scores: { sober: 3, gym: 1 } }
   ]},
-  { q: "你理想中的恋爱节奏是？", opts: [
-    { text: "每天都要见面或者视频", scores: { rush: 2, alarm: 2 } },
-    { text: "一周见两三次刚刚好", scores: { roommate: 2, sober: 2 } },
-    { text: "顺其自然，想见就见", scores: { buddha: 2, slowcook: 1 } },
-    { text: "保持一定的神秘感更好", scores: { flirt: 2, hunter: 2 } }
+  // === Round 4 (Q19-Q24) ===
+  // Q19 P:slowcook,hunter,cliff,buddha S:purist,drama,ideal,flirt
+  { q: "你觉得多久确认恋爱关系比较合适？", opts: [
+    { text: "至少认识半年以上，了解够深了再说", scores: { slowcook: 3, purist: 1 } },
+    { text: "感觉对了就在一起，等太久心动就没了", scores: { hunter: 3, drama: 1 } },
+    { text: "如果一个月内没感觉，就不用浪费时间了", scores: { cliff: 3, ideal: 1 } },
+    { text: "看缘分吧，急也急不来", scores: { buddha: 3, flirt: 1 } }
   ]},
-  { q: "你会翻对象的手机吗？", opts: [
-    { text: "想翻但忍住了", scores: { detective: 2, alarm: 1 } },
-    { text: "翻过，而且觉得没什么问题", scores: { detective: 3 } },
-    { text: "从来不翻，信任是底线", scores: { sober: 3, ideal: 1 } },
-    { text: "我连自己手机都懒得翻", scores: { buddha: 3 } }
+  // Q20 P:sober,loop,show,gym S:money,pleaser,rush,ideal
+  { q: "恋爱中遇到一个让你心动的新朋友。你会？", opts: [
+    { text: "跟对象坦白说我的感受，一起面对", scores: { sober: 3, money: 1 } },
+    { text: "开始纠结现任和这个人到底谁更好", scores: { loop: 3, pleaser: 1 } },
+    { text: "发朋友圈暗示自己很幸福，提醒自己别乱来", scores: { show: 3, newbie: 1 } },
+    { text: "分析一下为什么会心动，是不是现在的关系有问题", scores: { gym: 3, ideal: 1 } }
   ]},
-  { q: "对象说'你变了'，你的反应？", opts: [
-    { text: "认真反思自己是不是真的变了", scores: { gym: 3, pleaser: 1 } },
-    { text: "你也变了啊，彼此彼此", scores: { tsundere: 2, sober: 1 } },
-    { text: "心里一紧，是不是要分手的前兆", scores: { alarm: 3 } },
-    { text: "人都会变的，这很正常", scores: { buddha: 2, cliff: 1 } }
+  // Q21 P:detective,parent,tsundere,drama S:alarm,rush,silent,hunter
+  { q: "对象说今天心情不好但不想说原因。你会？", opts: [
+    { text: "一直追问到底怎么了，不说清楚我不放心", scores: { detective: 3, show: 1 } },
+    { text: "什么都不问，默默买了TA爱吃的送过去", scores: { parent: 3, newbie: 1 } },
+    { text: "嘴上说'不想说就算了'，其实很想知道", scores: { tsundere: 3, silent: 1 } },
+    { text: "策划一个小惊喜让TA开心起来", scores: { drama: 3, hunter: 1 } }
   ]},
-  { q: "你更倾向于哪种表白方式？", opts: [
-    { text: "精心准备一个浪漫的场景", scores: { drama: 3, daydream: 1 } },
-    { text: "找个合适的时机自然地说出来", scores: { slowcook: 2, sober: 1 } },
-    { text: "等对方先表白", scores: { buddha: 1, vanish: 1, flirt: 1 } },
-    { text: "不表白，用行动让对方感受到", scores: { tsundere: 2, silent: 1 } }
+  // Q22 P:ideal,money,daydream,rush S:sober,gym,loop,alarm
+  { q: "朋友都在催你谈恋爱，你的态度是？", opts: [
+    { text: "我也想啊，但没遇到符合标准的", scores: { ideal: 3, sober: 1 } },
+    { text: "现在事业要紧，恋爱以后再说", scores: { money: 3, gym: 1 } },
+    { text: "其实我心里已经有一个理想的TA了", scores: { daydream: 3, loop: 1 } },
+    { text: "一被催就更想赶紧找一个", scores: { rush: 3, tsundere: 1 } }
   ]},
-  { q: "恋爱中你最受不了的是什么？", opts: [
-    { text: "对方不回消息或者敷衍", scores: { alarm: 3, rush: 1 } },
-    { text: "对方管太多，没有自由", scores: { sober: 2, vanish: 2 } },
-    { text: "没有深度交流，只有表面寒暄", scores: { purist: 3, ideal: 1 } },
-    { text: "一成不变，毫无新鲜感", scores: { hunter: 3, drama: 1 } }
+  // Q23 P:roommate,silent,alarm,flirt S:vanish,cliff,rush,buddha
+  { q: "对象约好了周末见面，但临时说有事来不了。你会？", opts: [
+    { text: "没关系，那我自己安排别的事", scores: { roommate: 3, vanish: 1 } },
+    { text: "有点失望但不会说出来", scores: { silent: 3, cliff: 1 } },
+    { text: "很不开心，觉得TA不重视我", scores: { alarm: 3, slowcook: 1 } },
+    { text: "无所谓，正好约别的朋友", scores: { flirt: 3, buddha: 1 } }
   ]},
-  { q: "朋友说你对象配不上你，你会？", opts: [
-    { text: "生气，我的感情不需要别人评价", scores: { rush: 2, detective: 1 } },
-    { text: "认真想想朋友说的有没有道理", scores: { gym: 2, sober: 1 } },
-    { text: "嘴上反驳但心里开始动摇", scores: { alarm: 2, daydream: 1 } },
-    { text: "无所谓，我开心就好", scores: { buddha: 2, roommate: 1 } }
+  // Q24 P:purist,vanish,newbie,pleaser S:daydream,roommate,slowcook,loop
+  { q: "你觉得恋爱中最重要的是什么？", opts: [
+    { text: "灵魂上的共鸣，能聊到一起去", scores: { purist: 3, daydream: 1 } },
+    { text: "彼此有空间，不要太黏", scores: { vanish: 3, roommate: 1 } },
+    { text: "真心对待彼此，哪怕笨拙一点也没关系", scores: { newbie: 3, slowcook: 1 } },
+    { text: "愿意为对方付出，让TA开心最重要", scores: { pleaser: 3, loop: 1 } }
   ]},
-  { q: "你怎么看待异地恋？", opts: [
-    { text: "只要爱够深，距离不是问题", scores: { rush: 2, ideal: 2 } },
-    { text: "太难了，我需要陪伴", scores: { alarm: 2, parent: 1 } },
-    { text: "可以试试，不行就算了", scores: { buddha: 2, cliff: 1 } },
-    { text: "异地反而有种浪漫的感觉", scores: { daydream: 2, flirt: 1 } }
+  // === Round 5 (Q25-Q30) ===
+  // Q25 P:drama,vanish,newbie,pleaser S:show,silent,daydream,parent
+  { q: "对象给你准备了一个惊喜派对，邀请了你所有朋友。你的感受？", opts: [
+    { text: "感动到哭，这就是我梦想中的恋爱", scores: { drama: 3, show: 1 } },
+    { text: "开心但有点不自在，更希望是两个人的庆祝", scores: { vanish: 3, silent: 1 } },
+    { text: "受宠若惊，不知道该怎么回应这么大的惊喜", scores: { newbie: 3, daydream: 1 } },
+    { text: "太感动了，觉得自己一定要加倍对TA好", scores: { pleaser: 3, parent: 1 } }
   ]},
-  { q: "对象突然说想一个人静静，你会？", opts: [
-    { text: "尊重TA，给TA空间", scores: { sober: 3, roommate: 1 } },
-    { text: "嘴上说好，心里慌得一批", scores: { alarm: 3, tsundere: 1 } },
-    { text: "问清楚原因再决定", scores: { gym: 2, detective: 1 } },
-    { text: "正好我也想一个人待会儿", scores: { vanish: 2, buddha: 2 } }
+  // Q26 P:loop,tsundere,cliff,rush S:alarm,detective,sober,loop... wait
+  // Q26 P:loop,tsundere,cliff,rush S:pleaser,detective,sober,daydream
+  { q: "你和对象冷战了三天，谁都没先开口。你会？", opts: [
+    { text: "受不了了，主动找TA和好，分开太难受了", scores: { loop: 3, pleaser: 1 } },
+    { text: "发个表情包试探一下，但绝不先认错", scores: { tsundere: 3, detective: 1 } },
+    { text: "认真考虑这段关系还要不要继续", scores: { cliff: 3, sober: 1 } },
+    { text: "追出去找TA，不管谁对谁错", scores: { rush: 3, daydream: 1 } }
   ]},
-  { q: "你觉得恋爱中谁应该主动多一点？", opts: [
-    { text: "我愿意主动，让对方感受到我的爱", scores: { rush: 2, parent: 2 } },
-    { text: "应该对等，不能总是一个人付出", scores: { sober: 2, gym: 1 } },
-    { text: "希望对方主动多一点", scores: { alarm: 1, newbie: 2 } },
-    { text: "不在意谁主动，自然就好", scores: { buddha: 2, slowcook: 1 } }
+  // Q27 P:purist,flirt,alarm,roommate S:ideal,buddha,loop,vanish
+  { q: "什么样的聊天会让你对一个人产生好感？", opts: [
+    { text: "能聊人生聊理想，聊到忘记时间的深度对话", scores: { purist: 3, ideal: 1 } },
+    { text: "有来有回的调侃和互怼，越损越亲", scores: { flirt: 3, buddha: 1 } },
+    { text: "对方主动关心我的日常，记住我说过的每个细节", scores: { alarm: 3, loop: 1 } },
+    { text: "轻松有趣不用想太多的闲聊", scores: { roommate: 3, vanish: 1 } }
   ]},
-  { q: "你会为了对象改变自己的生活习惯吗？", opts: [
-    { text: "当然，爱一个人就要互相磨合", scores: { rush: 2, pleaser: 2 } },
-    { text: "小的可以，核心习惯不会变", scores: { sober: 3 } },
-    { text: "希望对方接受真实的我", scores: { ideal: 2, vanish: 1 } },
-    { text: "已经在不知不觉中改了很多了", scores: { parent: 2, slowcook: 1 } }
+  // Q28 P:show,sober,silent,gym S:drama,ideal,tsundere,money
+  { q: "对象在社交媒体上从来不发关于你们的内容。你会？", opts: [
+    { text: "很在意，觉得TA是不是不想公开我们的关系", scores: { show: 3, drama: 1 } },
+    { text: "无所谓，感情好不好跟朋友圈没关系", scores: { sober: 3, ideal: 1 } },
+    { text: "不说但心里不舒服，默默记着", scores: { silent: 3, tsundere: 1 } },
+    { text: "找个机会跟TA聊聊，了解TA的想法", scores: { gym: 3, money: 1 } }
   ]},
-  { q: "你对'暧昧期'的态度是？", opts: [
-    { text: "最美好的阶段，享受那种心跳的感觉", scores: { flirt: 3, hunter: 1 } },
-    { text: "煎熬，赶紧确认关系吧", scores: { alarm: 2, rush: 2 } },
-    { text: "顺其自然，不急着定义", scores: { slowcook: 2, buddha: 1 } },
-    { text: "暧昧就暧昧呗，不一定要在一起", scores: { roommate: 2, flirt: 1 } }
+  // Q29 P:daydream,ideal,hunter,parent S:rush,purist,drama,alarm
+  { q: "你心目中完美的恋爱是什么样的？", opts: [
+    { text: "像电影里那样，每个瞬间都值得回味", scores: { daydream: 3, rush: 1 } },
+    { text: "两个人三观一致，互相欣赏，共同成长", scores: { ideal: 3, purist: 1 } },
+    { text: "永远有新鲜感，每天都有心动的瞬间", scores: { hunter: 3, drama: 1 } },
+    { text: "我照顾TA，TA依赖我，彼此需要", scores: { parent: 3, money: 1 } }
   ]},
-  { q: "对象在社交媒体上关注了很多好看的异性，你会？", opts: [
-    { text: "一个一个点进去看是谁", scores: { detective: 3, alarm: 1 } },
-    { text: "看看就好，谁还不看帅哥美女了", scores: { sober: 2, buddha: 1 } },
-    { text: "有点不舒服但不会说", scores: { silent: 2, tsundere: 1 } },
-    { text: "我也去关注一堆，扯平", scores: { tsundere: 1, hunter: 1 } }
+  // Q30 P:money,buddha,detective,slowcook S:gym,flirt,tsundere,newbie
+  { q: "好朋友跟你说觉得你对象在外面有暧昧。你会？", opts: [
+    { text: "先不管，把手头的工作忙完再说", scores: { money: 3, gym: 1 } },
+    { text: "不太信，朋友可能搞错了", scores: { buddha: 3, flirt: 1 } },
+    { text: "立刻开始调查，翻对象的手机和社交账号", scores: { detective: 3, tsundere: 1 } },
+    { text: "先观察一段时间再下结论", scores: { slowcook: 3, newbie: 1 } }
   ]},
-  { q: "你觉得恋爱中最浪漫的事是什么？", opts: [
-    { text: "在平凡的日子里突然给我一个惊喜", scores: { drama: 3, daydream: 1 } },
-    { text: "生病的时候有人照顾我", scores: { parent: 2, alarm: 1 } },
-    { text: "能聊到深夜还不觉得困", scores: { purist: 3 } },
-    { text: "一起为未来努力奋斗", scores: { money: 2, sober: 1 } }
+  // === Round 6 (Q31-Q36) ===
+  // Q31 P:pleaser,gym,roommate,tsundere S:rush,sober,buddha,alarm
+  { q: "对象说'你最近对我没以前那么好了'。你会？", opts: [
+    { text: "赶紧反省自己哪里做得不够，马上改", scores: { pleaser: 3, rush: 1 } },
+    { text: "认真想想是不是沟通方式出了问题", scores: { gym: 3, sober: 1 } },
+    { text: "我该怎样还怎样啊，可能是TA想多了", scores: { roommate: 3, buddha: 1 } },
+    { text: "我哪里不好了？你倒是说清楚啊", scores: { tsundere: 3, alarm: 1 } }
   ]},
-  { q: "你会主动跟对象说'我爱你'吗？", opts: [
-    { text: "经常说，爱就要大声说出来", scores: { rush: 2, drama: 2 } },
-    { text: "偶尔说，说多了就不值钱了", scores: { slowcook: 2, sober: 1 } },
-    { text: "打死都说不出口，但会用行动表达", scores: { tsundere: 3, silent: 1 } },
-    { text: "等对方先说我才说", scores: { newbie: 2, vanish: 1 } }
+  // Q32 P:loop,cliff,buddha,daydream S:alarm,ideal,roommate,rush
+  { q: "刷手机时看到前任过得很好的动态。你的反应？", opts: [
+    { text: "有点酸，忍不住反复看好几遍", scores: { loop: 3, alarm: 1 } },
+    { text: "早就取关了，根本看不到", scores: { cliff: 3, ideal: 1 } },
+    { text: "挺好的，各自安好", scores: { buddha: 3, roommate: 1 } },
+    { text: "突然有点怀念在一起的日子", scores: { daydream: 3, rush: 1 } }
   ]},
-  { q: "对象跟前任还保持联系，你能接受吗？", opts: [
-    { text: "完全不能，必须断干净", scores: { detective: 2, cliff: 2 } },
-    { text: "可以理解，但心里不太舒服", scores: { alarm: 2, tsundere: 1 } },
-    { text: "没问题，成年人的社交很正常", scores: { sober: 3, buddha: 1 } },
-    { text: "取决于他们之间是什么关系", scores: { gym: 2, ideal: 1 } }
+  // Q33 P:hunter,detective,sober,newbie S:flirt,alarm,gym,vanish
+  { q: "对象说'你是我见过最特别的人'。你的内心反应？", opts: [
+    { text: "有点上头，好久没有这种被撩到的感觉了", scores: { hunter: 3, flirt: 1 } },
+    { text: "开心，但也在想TA是不是对谁都这么说", scores: { detective: 3, alarm: 1 } },
+    { text: "谢谢，你也很不错", scores: { sober: 3, gym: 1 } },
+    { text: "脸红了，不知道该怎么接话", scores: { newbie: 3, vanish: 1 } }
   ]},
-  { q: "你在恋爱中更像哪种角色？", opts: [
-    { text: "照顾者，喜欢操心对方的一切", scores: { parent: 3, pleaser: 1 } },
-    { text: "被照顾的那个，享受被宠的感觉", scores: { alarm: 2, newbie: 1 } },
-    { text: "平等的伙伴，各管各的", scores: { sober: 2, roommate: 2 } },
-    { text: "气氛组，负责制造快乐", scores: { drama: 2, hunter: 1 } }
+  // Q34 P:alarm,rush,parent,flirt S:detective,loop,newbie,hunter
+  { q: "对象最近迷上了一个新爱好，花了很多时间在上面。你会？", opts: [
+    { text: "有点吃醋，觉得TA花在我身上的时间少了", scores: { alarm: 3, detective: 1 } },
+    { text: "只要TA开心就好，我全力支持", scores: { rush: 3, loop: 1 } },
+    { text: "帮TA研究相关的东西，默默在背后支持", scores: { parent: 3, newbie: 1 } },
+    { text: "也去找点新鲜事做，各玩各的", scores: { flirt: 3, hunter: 1 } }
   ]},
-  { q: "你会因为一首歌想起前任吗？", opts: [
-    { text: "会，而且会单曲循环哭一场", scores: { rush: 2, loop: 2 } },
-    { text: "会想起，但也就一瞬间的事", scores: { gym: 2, sober: 1 } },
-    { text: "早就把相关的歌都删了", scores: { cliff: 3 } },
-    { text: "不会，我听歌不带感情的", scores: { buddha: 2, money: 1 } }
+  // Q35 P:slowcook,silent,drama,ideal S:roommate,cliff,show,purist
+  { q: "在一起半年了，对象从来没说过'我爱你'。你会？", opts: [
+    { text: "行动比语言重要，TA对我好就够了", scores: { slowcook: 3, roommate: 1 } },
+    { text: "我也不太会说这种话，所以能理解", scores: { silent: 3, cliff: 1 } },
+    { text: "有点失望，恋爱不就应该说情话吗", scores: { drama: 3, show: 1 } },
+    { text: "会直接问TA为什么不说，是不是不够爱我", scores: { ideal: 3, purist: 1 } }
   ]},
-  { q: "对象忘了你们的纪念日，你会？", opts: [
-    { text: "很伤心，觉得TA不重视这段感情", scores: { alarm: 2, drama: 2 } },
-    { text: "提醒一下就好，谁还没个忘事的时候", scores: { sober: 2, parent: 1 } },
-    { text: "不说，但心里记着这笔账", scores: { silent: 2, tsundere: 2 } },
-    { text: "我自己也记不住纪念日", scores: { buddha: 2, roommate: 1 } }
+  // Q36 P:show,vanish,money,purist S:alarm,buddha,sober,daydream
+  { q: "你理想中的求婚方式是？", opts: [
+    { text: "在所有亲朋好友面前的盛大求婚", scores: { show: 3, alarm: 1 } },
+    { text: "不需要仪式，水到渠成自然就好", scores: { vanish: 3, buddha: 1 } },
+    { text: "先把经济基础打好再考虑这些", scores: { money: 3, sober: 1 } },
+    { text: "只有两个人的私密浪漫时刻", scores: { purist: 3, daydream: 1 } }
   ]},
-  { q: "你觉得恋爱需要'门当户对'吗？", opts: [
-    { text: "需要，三观和背景相近更容易相处", scores: { ideal: 3, sober: 1 } },
-    { text: "不需要，爱情面前人人平等", scores: { rush: 2, daydream: 1 } },
-    { text: "精神上的门当户对比物质重要", scores: { purist: 3 } },
-    { text: "没想过，遇到喜欢的再说", scores: { buddha: 2, newbie: 1 } }
+  // === Round 7 (Q37-Q42) ===
+  // Q37 P:drama,purist,parent,vanish S:hunter,slowcook,alarm,silent
+  { q: "你觉得恋爱中最幸福的时刻是？", opts: [
+    { text: "对方为我精心准备了一个浪漫惊喜", scores: { drama: 3, hunter: 1 } },
+    { text: "深夜两个人聊到灵魂深处的话题", scores: { purist: 3, slowcook: 1 } },
+    { text: "对方在我生病时放下一切来照顾我", scores: { parent: 3, alarm: 1 } },
+    { text: "两个人安静待着，不说话也不尴尬", scores: { vanish: 3, silent: 1 } }
   ]},
-  { q: "恋爱中你最怕听到哪句话？", opts: [
-    { text: "我们冷静一下吧", scores: { alarm: 3, rush: 1 } },
-    { text: "你能不能别管我那么多", scores: { parent: 2, detective: 1 } },
-    { text: "你从来不说你的真实想法", scores: { silent: 2, vanish: 2 } },
-    { text: "我觉得我们之间没有激情了", scores: { hunter: 2, drama: 1 } }
+  // Q38 P:rush,ideal,buddha,cliff S:loop,purist,vanish,sober
+  { q: "你和对象因为未来规划产生了分歧。你会？", opts: [
+    { text: "我可以为了TA改变我的计划", scores: { rush: 3, loop: 1 } },
+    { text: "这种大事不能将就，必须找到共识", scores: { ideal: 3, purist: 1 } },
+    { text: "先搁置吧，走一步看一步", scores: { buddha: 3, vanish: 1 } },
+    { text: "如果谈不拢，可能就是不合适", scores: { cliff: 3, sober: 1 } }
   ]},
-  { q: "你会为了恋爱搬到另一个城市吗？", opts: [
-    { text: "会，为了爱情值得", scores: { rush: 3, daydream: 1 } },
-    { text: "不会，我的生活不能因为恋爱全盘改变", scores: { money: 2, sober: 2 } },
-    { text: "看对方值不值得", scores: { ideal: 2, gym: 1 } },
-    { text: "可以试试，不行再回来", scores: { buddha: 2, roommate: 1 } }
+  // Q39 P:newbie,sober,flirt,money S:pleaser,money... wait, money is primary
+  // Q39 P:newbie,sober,flirt,money S:pleaser,gym,buddha,ideal
+  { q: "对象在你不知情的情况下帮你做了一个重要决定。你会？", opts: [
+    { text: "虽然有点意外，但觉得TA是为我好", scores: { newbie: 3, pleaser: 1 } },
+    { text: "跟TA说以后这种事要先跟我商量", scores: { sober: 3, gym: 1 } },
+    { text: "觉得TA管太多了，有点想保持距离", scores: { flirt: 3, buddha: 1 } },
+    { text: "理解TA的出发点，但我有自己的规划", scores: { money: 3, ideal: 1 } }
   ]},
-  { q: "你怎么看待'恋爱脑'？", opts: [
-    { text: "没什么不好，说明爱得真诚", scores: { rush: 3, daydream: 1 } },
-    { text: "太可怕了，一定要保持清醒", scores: { sober: 3, money: 1 } },
-    { text: "年轻的时候可以，但要学会成长", scores: { gym: 3 } },
-    { text: "跟我没关系，我不太容易上头", scores: { buddha: 2, vanish: 1 } }
+  // Q40 P:slowcook,daydream,loop,show S:newbie,drama,rush,drama... wait
+  // Q40 P:slowcook,daydream,loop,show S:newbie,rush,pleaser,drama
+  { q: "你和对象的恋爱日常，你最希望是哪种画风？", opts: [
+    { text: "像老夫老妻一样自在舒服", scores: { slowcook: 3, newbie: 1 } },
+    { text: "每天都像偶像剧一样甜", scores: { daydream: 3, rush: 1 } },
+    { text: "分分合合但最终还是在一起", scores: { loop: 3, pleaser: 1 } },
+    { text: "每个纪念日都要发朋友圈记录", scores: { show: 3, drama: 1 } }
   ]},
-  { q: "对象的好朋友是异性，经常一起出去玩，你会？", opts: [
-    { text: "表面大度，暗中观察", scores: { detective: 3, tsundere: 1 } },
-    { text: "真心觉得没问题，信任对方", scores: { sober: 3 } },
-    { text: "直接说我不太舒服", scores: { alarm: 2, rush: 1 } },
-    { text: "我也找个异性朋友多出去玩", scores: { hunter: 1, flirt: 1 } }
+  // Q41 P:gym,tsundere,alarm,detective S:sober,silent,parent,cliff
+  { q: "你在恋爱中犯了错伤害了对方。你会怎么处理？", opts: [
+    { text: "承认错误，分析原因，保证不再犯", scores: { gym: 3, sober: 1 } },
+    { text: "知道自己错了但说不出口，默默用行动补偿", scores: { tsundere: 3, silent: 1 } },
+    { text: "反复道歉，生怕对方因此离开我", scores: { alarm: 3, parent: 1 } },
+    { text: "感谢对方指出问题，但也会留意TA的态度", scores: { detective: 3, cliff: 1 } }
   ]},
-  { q: "你觉得恋爱中最理想的沟通方式是？", opts: [
-    { text: "有什么说什么，坦诚相待", scores: { sober: 2, gym: 2 } },
-    { text: "用行动代替语言", scores: { tsundere: 2, parent: 1 } },
-    { text: "写长信或者发长消息表达心意", scores: { daydream: 2, drama: 1 } },
-    { text: "等情绪平复了再慢慢聊", scores: { silent: 2, slowcook: 1 } }
+  // Q42 P:hunter,roommate,silent,pleaser S:drama,sober,vanish,rush
+  { q: "对象跟你说'我今天遇到一个特别帅/美的人'。你会？", opts: [
+    { text: "也跟TA分享我今天遇到的有趣的人", scores: { hunter: 3, drama: 1 } },
+    { text: "无所谓，看看又不会少块肉", scores: { roommate: 3, sober: 1 } },
+    { text: "不说话，但表情已经说明了一切", scores: { silent: 3, vanish: 1 } },
+    { text: "笑着说'那你去找TA吧'，心里有点不舒服", scores: { pleaser: 3, rush: 1 } }
   ]},
-  { q: "你会把恋爱的烦恼告诉朋友吗？", opts: [
-    { text: "会，朋友就是用来吐槽的", scores: { show: 2, alarm: 1 } },
-    { text: "不会，感情的事自己消化", scores: { vanish: 2, silent: 1 } },
-    { text: "只跟最好的朋友说", scores: { slowcook: 1, sober: 1 } },
-    { text: "不仅告诉朋友，还发到网上求建议", scores: { show: 3, newbie: 1 } }
+  // === Round 8 (Q43-Q48) ===
+  // Q43 P:rush,parent,show,sober S:alarm,pleaser,hunter,money
+  { q: "恋爱后你的朋友觉得你变了。你觉得最可能的变化是？", opts: [
+    { text: "恋爱后基本不出来社交了，都在陪对象", scores: { rush: 3, alarm: 1 } },
+    { text: "变得更会照顾人了，连朋友都跟着受益", scores: { parent: 3, pleaser: 1 } },
+    { text: "朋友圈画风突变，全是秀恩爱的内容", scores: { show: 3, hunter: 1 } },
+    { text: "没什么变化，该怎样还怎样", scores: { sober: 3, money: 1 } }
   ]},
-  { q: "你对'先结婚后恋爱'怎么看？", opts: [
-    { text: "不可能，没有感情基础怎么结婚", scores: { ideal: 2, purist: 2 } },
-    { text: "也不是不行，感情可以慢慢培养", scores: { slowcook: 3 } },
-    { text: "太冒险了，万一不合适呢", scores: { gym: 2, sober: 1 } },
-    { text: "随缘吧，什么方式都有可能幸福", scores: { buddha: 3 } }
+  // Q44 P:purist,vanish,pleaser,gym S:ideal,buddha,loop,sober
+  { q: "你觉得一段好的恋爱关系最核心的基础是？", opts: [
+    { text: "两个人的精神世界能对齐", scores: { purist: 3, ideal: 1 } },
+    { text: "彼此信任，给对方足够的自由和空间", scores: { vanish: 3, buddha: 1 } },
+    { text: "愿意为对方付出和牺牲", scores: { pleaser: 3, loop: 1 } },
+    { text: "两个人都在不断成长和进步", scores: { gym: 3, sober: 1 } }
   ]},
-  { q: "你在恋爱中会吃醋吗？", opts: [
-    { text: "经常吃，而且藏不住", scores: { detective: 2, alarm: 2 } },
-    { text: "会吃醋但不会表现出来", scores: { tsundere: 3, silent: 1 } },
-    { text: "很少吃醋，我比较自信", scores: { sober: 2, money: 1 } },
-    { text: "吃醋说明在乎，这是好事", scores: { rush: 2, drama: 1 } }
+  // Q45 P:roommate,flirt,drama,alarm S:buddha,hunter,daydream,detective
+  { q: "对象视频通话时说困了想睡了。你会？", opts: [
+    { text: "好的晚安，然后各自休息", scores: { roommate: 3, buddha: 1 } },
+    { text: "再聊五分钟嘛，舍不得挂", scores: { flirt: 3, hunter: 1 } },
+    { text: "说晚安，然后发一段长长的晚安情话", scores: { drama: 3, daydream: 1 } },
+    { text: "叮嘱TA早点睡，然后一直等TA说已经睡了", scores: { alarm: 3, detective: 1 } }
   ]},
-  { q: "对象说想带你见家长，你的反应？", opts: [
-    { text: "开心！说明TA是认真的", scores: { rush: 2, ideal: 1 } },
-    { text: "有点紧张，但愿意去", scores: { newbie: 2, slowcook: 1 } },
-    { text: "是不是太快了？我还没准备好", scores: { vanish: 2, flirt: 1 } },
-    { text: "先了解一下TA家里的情况再说", scores: { sober: 2, gym: 1 } }
+  // Q46 P:daydream,hunter,newbie,cliff S:drama,rush,slowcook,silent
+  { q: "你发现对象偷偷给你存了一个很丑的备注名。你会？", opts: [
+    { text: "觉得好可爱，偷偷笑了好久", scores: { daydream: 3, drama: 1 } },
+    { text: "也给TA存一个更丑的，看谁更损", scores: { hunter: 3, rush: 1 } },
+    { text: "有点不好意思，不知道该怎么反应", scores: { newbie: 3, slowcook: 1 } },
+    { text: "觉得不太尊重人，有点不高兴", scores: { cliff: 3, silent: 1 } }
   ]},
-  { q: "你觉得恋爱中最甜的瞬间是？", opts: [
-    { text: "对方记住了我不经意间说过的话", scores: { purist: 2, daydream: 2 } },
-    { text: "一起完成了一件有意义的事", scores: { money: 1, gym: 2 } },
-    { text: "什么都不做，就是待在一起", scores: { roommate: 2, slowcook: 1 } },
-    { text: "在所有人面前牵我的手", scores: { show: 2, drama: 2 } }
+  // Q47 P:ideal,money,loop,tsundere S:cliff,gym,rush,detective
+  { q: "对象突然说'我觉得我配不上你'。你会？", opts: [
+    { text: "觉得TA说得有道理，开始重新审视这段关系", scores: { ideal: 3, cliff: 1 } },
+    { text: "认真跟TA聊聊为什么会这么想", scores: { money: 3, gym: 1 } },
+    { text: "心疼TA，赶紧安慰说我离不开你", scores: { loop: 3, rush: 1 } },
+    { text: "说'确实'，然后看TA的反应", scores: { tsundere: 3, detective: 1 } }
   ]},
-  { q: "你会因为对方的一个缺点就放弃这段感情吗？", opts: [
-    { text: "看是什么缺点，触碰底线的会", scores: { cliff: 2, ideal: 2 } },
-    { text: "不会，人无完人，互相包容", scores: { rush: 2, parent: 1 } },
-    { text: "会先尝试沟通改变", scores: { gym: 2, sober: 1 } },
-    { text: "可能会纠结很久但最终还是算了", scores: { loop: 2, pleaser: 1 } }
+  // Q48 P:buddha,silent,detective,slowcook S:flirt,cliff,alarm,purist
+  { q: "对象约会时一直在夸别的情侣好甜。你会？", opts: [
+    { text: "附和一下，然后继续吃东西", scores: { buddha: 3, flirt: 1 } },
+    { text: "不说话，但表情已经说明了一切", scores: { silent: 3, cliff: 1 } },
+    { text: "开始观察那对情侣，分析TA为什么觉得甜", scores: { detective: 3, alarm: 1 } },
+    { text: "觉得我们也可以慢慢变成那样", scores: { slowcook: 3, purist: 1 } }
   ]},
-  { q: "你更喜欢哪种恋爱状态？", opts: [
-    { text: "轰轰烈烈，爱得刻骨铭心", scores: { rush: 2, drama: 2 } },
-    { text: "细水长流，平淡但温暖", scores: { slowcook: 2, parent: 1 } },
-    { text: "若即若离，保持新鲜感", scores: { flirt: 2, hunter: 2 } },
-    { text: "独立又亲密，各自精彩", scores: { sober: 2, roommate: 1 } }
+  // === Round 9 (Q49-Q54) ===
+  // Q49 P:newbie,gym,ideal,flirt S:slowcook,money,purist,roommate
+  { q: "如果恋爱有段位，你觉得自己是什么水平？", opts: [
+    { text: "青铜，还在学习中，经常不知道该怎么做", scores: { newbie: 3, slowcook: 1 } },
+    { text: "钻石，经历过几段感情，越来越懂了", scores: { gym: 3, money: 1 } },
+    { text: "王者，但选择不上分，宁缺毋滥", scores: { ideal: 3, purist: 1 } },
+    { text: "一直在匹配中，享受暧昧但不想正式开局", scores: { flirt: 3, roommate: 1 } }
   ]},
-  { q: "你会为了对象学一项新技能吗？比如做饭、摄影", opts: [
-    { text: "当然，为了TA什么都愿意学", scores: { rush: 2, pleaser: 2 } },
-    { text: "如果我自己也感兴趣的话", scores: { sober: 3 } },
-    { text: "会学，而且要学到最好给TA看", scores: { show: 2, drama: 1 } },
-    { text: "不会特意去学，做自己就好", scores: { vanish: 1, buddha: 2 } }
+  // Q50 P:pleaser,detective,silent,cliff S:parent,tsundere,vanish,ideal
+  { q: "对象跟你说'我们能不能少吵架多沟通'。你会？", opts: [
+    { text: "好的我以后注意，都听你的", scores: { pleaser: 3, parent: 1 } },
+    { text: "那你倒是说啊，每次都是你先不理我", scores: { detective: 3, tsundere: 1 } },
+    { text: "觉得说了也没用，该吵还是会吵", scores: { silent: 3, vanish: 1 } },
+    { text: "如果连沟通都做不到，那还有什么意义", scores: { cliff: 3, ideal: 1 } }
   ]},
-  { q: "你怎么看待恋爱中的'冷战'？", opts: [
-    { text: "受不了，有问题必须马上解决", scores: { rush: 2, alarm: 2 } },
-    { text: "有时候冷静一下也好", scores: { silent: 2, sober: 1 } },
-    { text: "我就是那个先发起冷战的人", scores: { silent: 3, tsundere: 1 } },
-    { text: "冷战超过三天我就当分手了", scores: { cliff: 3 } }
+  // Q51 P:show,daydream,money,loop S:rush,purist,gym,alarm
+  { q: "恋爱后你的手机相册里最多的是？", opts: [
+    { text: "两个人的合照和约会打卡记录", scores: { show: 3, rush: 1 } },
+    { text: "偷拍对方的照片，TA都不知道我拍了", scores: { daydream: 3, purist: 1 } },
+    { text: "跟恋爱前差不多，工作截图和学习笔记", scores: { money: 3, gym: 1 } },
+    { text: "还留着跟前任的聊天截图，舍不得删", scores: { loop: 3, alarm: 1 } }
   ]},
-  { q: "你觉得前任可以做朋友吗？", opts: [
-    { text: "可以，分手了也是朋友", scores: { buddha: 2, gym: 1 } },
-    { text: "不行，断了就是断了", scores: { cliff: 3, detective: 1 } },
-    { text: "嘴上说可以，但做不到", scores: { loop: 2, tsundere: 1 } },
-    { text: "要看分手的原因", scores: { sober: 2, ideal: 1 } }
+  // Q52 P:parent,alarm,slowcook,drama S:pleaser,rush,newbie,show
+  { q: "对象要出差一周，临走前你会？", opts: [
+    { text: "帮TA收拾行李，塞满零食和日用品", scores: { parent: 3, pleaser: 1 } },
+    { text: "叮嘱TA到了报平安，每天要视频", scores: { alarm: 3, rush: 1 } },
+    { text: "说一句路上注意安全，然后照常过日子", scores: { slowcook: 3, newbie: 1 } },
+    { text: "偷偷在TA行李箱里塞一封手写信", scores: { drama: 3, show: 1 } }
   ]},
-  { q: "对象在你面前哭了，你会？", opts: [
-    { text: "抱住TA，什么都不说", scores: { parent: 3, rush: 1 } },
-    { text: "帮TA分析问题，想解决办法", scores: { sober: 2, gym: 1 } },
-    { text: "跟着一起哭", scores: { rush: 2, daydream: 1 } },
-    { text: "有点手足无措，不知道该怎么办", scores: { newbie: 3, vanish: 1 } }
+  // Q53 P:vanish,hunter,rush,buddha S:roommate,drama,daydream,flirt
+  { q: "在一起三年了，有人问你们感情好的秘诀。你会说？", opts: [
+    { text: "给彼此足够的空间，不要黏太紧", scores: { vanish: 3, roommate: 1 } },
+    { text: "保持新鲜感，经常尝试新东西", scores: { hunter: 3, drama: 1 } },
+    { text: "就是很爱TA，什么都愿意为TA做", scores: { rush: 3, daydream: 1 } },
+    { text: "没什么秘诀，顺其自然就好", scores: { buddha: 3, flirt: 1 } }
   ]},
-  { q: "你会经常回忆恋爱中的美好瞬间吗？", opts: [
-    { text: "会，还会翻聊天记录和照片", scores: { daydream: 3, loop: 1 } },
-    { text: "偶尔想起来会笑一下", scores: { slowcook: 2, sober: 1 } },
-    { text: "不太会，活在当下比较重要", scores: { money: 2, buddha: 1 } },
-    { text: "会，而且会发到社交媒体上", scores: { show: 3 } }
+  // Q54 P:tsundere,roommate,sober,purist S:silent,vanish,cliff,slowcook
+  { q: "对象跟你坦白说TA以前劈过腿。你会？", opts: [
+    { text: "嘴上说'跟我有什么关系'，心里其实很在意", scores: { tsundere: 3, silent: 1 } },
+    { text: "过去的事就过去了，不影响我们现在", scores: { roommate: 3, vanish: 1 } },
+    { text: "冷静分析一下TA现在的态度和行为", scores: { sober: 3, cliff: 1 } },
+    { text: "这说明TA的价值观可能跟我不一样", scores: { purist: 3, slowcook: 1 } }
   ]},
-  { q: "你觉得恋爱中最重要的品质是？", opts: [
-    { text: "忠诚和专一", scores: { detective: 1, ideal: 2, rush: 1 } },
-    { text: "理解和包容", scores: { parent: 2, pleaser: 1 } },
-    { text: "独立和上进", scores: { money: 2, sober: 2 } },
-    { text: "有趣和浪漫", scores: { hunter: 2, drama: 2 } }
+  // === Round 10 (Q55-Q60) ===
+  // Q55 P:daydream,show,hunter,newbie S:drama,alarm,flirt,pleaser
+  { q: "你觉得什么时候最想谈恋爱？", opts: [
+    { text: "看完一部浪漫电影的时候", scores: { daydream: 3, drama: 1 } },
+    { text: "看到别人秀恩爱被塞狗粮的时候", scores: { show: 3, alarm: 1 } },
+    { text: "遇到一个让我心动的人的时候", scores: { hunter: 3, flirt: 1 } },
+    { text: "一个人过节觉得有点孤单的时候", scores: { newbie: 3, pleaser: 1 } }
   ]},
-  { q: "如果可以选择，你希望恋爱中的自己是什么样的？", opts: [
-    { text: "温柔体贴，让对方感到幸福", scores: { parent: 2, pleaser: 1 } },
-    { text: "独立自信，有自己的光芒", scores: { sober: 2, money: 1 } },
-    { text: "浪漫有趣，每天都有新花样", scores: { drama: 2, hunter: 1 } },
-    { text: "真实自然，不用刻意表演", scores: { buddha: 2, slowcook: 1 } }
+  // Q56 P:silent,pleaser,tsundere,money S:vanish,loop,alarm,gym
+  { q: "对象跟你说'我觉得你太粘人了'。你会？", opts: [
+    { text: "不说话了，但心里很委屈", scores: { silent: 3, vanish: 1 } },
+    { text: "好吧，那我给你多一点空间", scores: { pleaser: 3, loop: 1 } },
+    { text: "粘人？我还觉得你太冷淡了呢", scores: { tsundere: 3, alarm: 1 } },
+    { text: "那正好，我也有自己的事要忙", scores: { money: 3, gym: 1 } }
   ]},
-  { q: "你会因为孤独而开始一段恋爱吗？", opts: [
-    { text: "可能会，有人陪总比一个人好", scores: { alarm: 2, roommate: 1 } },
-    { text: "不会，宁缺毋滥", scores: { ideal: 3, sober: 1 } },
-    { text: "说不好，看遇到什么人", scores: { buddha: 2, newbie: 1 } },
-    { text: "孤独？我一个人过得挺好的", scores: { money: 2, vanish: 1 } }
+  // Q57 P:vanish,purist,slowcook,loop S:buddha,daydream,ideal,rush
+  { q: "你觉得恋爱中最难的是什么？", opts: [
+    { text: "保持自我，不被关系吞噬", scores: { vanish: 3, buddha: 1 } },
+    { text: "找到一个真正懂你的人", scores: { purist: 3, daydream: 1 } },
+    { text: "从朋友变成恋人的那一步", scores: { slowcook: 3, ideal: 1 } },
+    { text: "放下过去，不再想前任", scores: { loop: 3, rush: 1 } }
   ]},
-  { q: "你对'灵魂伴侣'这个概念怎么看？", opts: [
-    { text: "相信，而且一直在找", scores: { purist: 3, ideal: 1 } },
-    { text: "不太信，合适的人是磨合出来的", scores: { gym: 2, slowcook: 1 } },
-    { text: "信，但觉得很难遇到", scores: { daydream: 2, ideal: 1 } },
-    { text: "想太多了，开心就好", scores: { buddha: 2, roommate: 1 } }
+  // Q58 P:sober,cliff,rush,parent S:gym,silent,loop,newbie
+  { q: "你和对象因为家务分配吵了起来。你会？", opts: [
+    { text: "列个清单公平分配，用制度解决问题", scores: { sober: 3, gym: 1 } },
+    { text: "连家务都谈不拢，以后怎么过日子", scores: { cliff: 3, silent: 1 } },
+    { text: "算了我全包了，只要TA开心就好", scores: { rush: 3, loop: 1 } },
+    { text: "帮TA把活都干了，顺便教TA怎么做", scores: { parent: 3, newbie: 1 } }
   ]},
-  { q: "恋爱中对方做了让你失望的事，你会？", opts: [
-    { text: "直接摊牌谈清楚", scores: { sober: 2, cliff: 1 } },
-    { text: "先自己消化一下再说", scores: { silent: 2, vanish: 1 } },
-    { text: "嘴上说没事，但态度明显变了", scores: { tsundere: 2, silent: 1 } },
-    { text: "原谅TA，但心里记着", scores: { pleaser: 2, loop: 1 } }
+  // Q59 P:buddha,ideal,alarm,flirt S:roommate,cliff,parent,hunter
+  { q: "如果给你的恋爱态度选一个关键词，你会选？", opts: [
+    { text: "顺其自然", scores: { buddha: 3, roommate: 1 } },
+    { text: "宁缺毋滥", scores: { ideal: 3, cliff: 1 } },
+    { text: "全心投入", scores: { alarm: 3, parent: 1 } },
+    { text: "享受当下", scores: { flirt: 3, hunter: 1 } }
   ]},
-  { q: "你觉得恋爱中'作'是一种什么行为？", opts: [
-    { text: "是在试探对方的底线，想确认被爱", scores: { alarm: 2, detective: 1 } },
-    { text: "是不成熟的表现，有话好好说就行", scores: { sober: 2, gym: 1 } },
-    { text: "偶尔作一下挺可爱的", scores: { drama: 2, tsundere: 1 } },
-    { text: "我从来不作，嫌麻烦", scores: { buddha: 2, money: 1 } }
-  ]},
-  { q: "最后一题：用一句话形容你理想中的爱情？", opts: [
-    { text: "执子之手，与子偕老", scores: { rush: 1, ideal: 1, slowcook: 2 } },
-    { text: "你是我的全世界", scores: { rush: 3, alarm: 1 } },
-    { text: "我们各自发光，照亮彼此", scores: { sober: 2, money: 2 } },
-    { text: "在一起很开心，不在一起也没关系", scores: { buddha: 2, roommate: 2 } }
+  // Q60 P:gym,roommate,detective,drama S:money,sober,loop,show
+  { q: "最后一题：你觉得爱情在你生活中的位置是？", opts: [
+    { text: "让我不断成长的人生课题", scores: { gym: 3, money: 1 } },
+    { text: "生活的调味品，有最好没有也行", scores: { roommate: 3, sober: 1 } },
+    { text: "需要认真经营和守护的珍贵关系", scores: { detective: 3, loop: 1 } },
+    { text: "值得用一辈子去浪漫的事", scores: { drama: 3, show: 1 } }
   ]}
 ];
