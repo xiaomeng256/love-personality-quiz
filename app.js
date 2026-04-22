@@ -227,3 +227,57 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   showPage('start-page');
 });
+
+// === 图鉴功能 ===
+let previousPage = 'start-page';
+
+function showGallery() {
+  previousPage = 'result-page';
+  renderGallery();
+  showPage('gallery-page');
+}
+
+function goBackFromGallery() {
+  showPage(previousPage);
+}
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  if (grid.children.length > 0) return; // 已渲染过
+  Object.entries(personalities).forEach(([key, p]) => {
+    const card = document.createElement('div');
+    card.className = 'gallery-card';
+    card.onclick = () => openModal(key);
+    card.innerHTML = `
+      <div class="gallery-card-header" style="background:linear-gradient(135deg,${p.color[0]}22,${p.color[1]}22)">
+        <div class="gallery-card-avatar">${avatars[key] || ''}</div>
+        <div class="gallery-card-info">
+          <div class="gallery-card-name">${p.emoji} ${p.name}</div>
+          <span class="gallery-card-tag" style="background:${p.color[1]}">${p.subtitle}</span>
+        </div>
+      </div>
+      <div class="gallery-card-desc">${p.desc}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openModal(key) {
+  const p = personalities[key];
+  const header = document.getElementById('modal-card-header');
+  header.style.background = 'linear-gradient(135deg,' + p.color[0] + ',' + p.color[1] + ')';
+  header.innerHTML = '<div class="card-avatar">' + (avatars[key] || '') + '</div><div class="card-emoji">' + p.emoji + '</div>';
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-tag').textContent = p.subtitle;
+  document.getElementById('modal-tag').style.background = p.color[1];
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-pros').textContent = p.pros;
+  document.getElementById('modal-cons').textContent = p.cons;
+  document.getElementById('modal-match').textContent = p.match;
+  document.getElementById('modal-clash').textContent = p.clash;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}

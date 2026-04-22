@@ -75,14 +75,48 @@
                 <div class="result-actions">
                     <button class="btn-primary" onclick="saveCardImage()">📷 保存卡片图片</button>
                     <button class="btn-secondary" onclick="copyShareLink()">🔗 复制分享链接</button>
+                    <button class="btn-secondary" onclick="showGallery()">📖 查看全部24种人格</button>
                     <button class="btn-outline" onclick="restartQuiz()">🔄 重新测试</button>
                 </div>
                 <p id="share-toast" class="share-toast"></p>
             </div>
         </div>
+
+        <!-- 图鉴页 -->
+        <div id="gallery-page" class="page">
+            <div class="gallery-container">
+                <h1 class="gallery-title">💘 24种恋爱人格图鉴</h1>
+                <p class="gallery-subtitle">点击卡片查看详情</p>
+                <div id="gallery-grid" class="gallery-grid"></div>
+                <div class="gallery-actions">
+                    <button class="btn-primary" onclick="startQuiz()">🎯 开始测试</button>
+                    <button class="btn-outline" onclick="goBackFromGallery()">← 返回</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- 隐藏的canvas用于生成图片 -->
     <canvas id="share-canvas" style="display:none;"></canvas>
+    <!-- 详情弹窗 -->
+    <div id="modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-card">
+            <div class="modal-close"><button onclick="closeModal()">✕</button></div>
+            <div class="modal-header card-header" id="modal-card-header"></div>
+            <div class="card-body">
+                <h1 id="modal-name"></h1>
+                <span id="modal-tag" class="card-tag"></span>
+                <p id="modal-desc" class="card-desc"></p>
+            </div>
+            <div class="card-footer">
+                <div class="card-stat"><span class="stat-label">✅ 恋爱优势</span><p id="modal-pros"></p></div>
+                <div class="card-stat"><span class="stat-label">⚠️ 踩雷预警</span><p id="modal-cons"></p></div>
+                <div class="card-match-row">
+                    <div class="card-match"><span class="stat-label">💕 最佳CP</span><p id="modal-match"></p></div>
+                    <div class="card-match"><span class="stat-label">💔 冤家</span><p id="modal-clash"></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="data.js"></script>
     <script src="avatars.js"></script>
     <script src="app.js"></script>
