@@ -250,7 +250,7 @@ const questions = [
   { q: "周五晚上对象突然说想见你，但你已经约了朋友。你会？", opts: [
     { text: "秒回'来了'，朋友那边随便编个理由取消", scores: { rush: 3, loop: 1 } },
     { text: "跟TA说改天吧，今晚有自己的安排", scores: { roommate: 3, parent: 1 } },
-    { text: "纠结到胃疼，一直刷消息怕TA不高兴", scores: { alarm: 3, detective: 1 } },
+    { text: "纠结半天，怕TA不开心又怕朋友不开心", scores: { alarm: 3, detective: 1 } },
     { text: "回一句'看心情'，享受TA着急的样子", scores: { hunter: 3, flirt: 1 } }
   ]},
   // Q02 P:sober,slowcook,buddha,money S:gym,ideal,roommate,purist
@@ -272,7 +272,7 @@ const questions = [
     { text: "不太想管，TA的社交是TA的事", scores: { vanish: 3, roommate: 1 } },
     { text: "说没关系你去吧，心里其实不太舒服", scores: { pleaser: 3, parent: 1 } },
     { text: "表面淡定，回家就翻TA的聊天记录", scores: { detective: 3, cliff: 1 } },
-    { text: "无所谓，反正我也有别的朋友可以约", scores: { flirt: 3, hunter: 1 } }
+    { text: "不在意，趁TA不在正好约自己的朋友出去玩", scores: { flirt: 3, hunter: 1 } }
   ]},
   // Q05 P:purist,newbie,gym,cliff S:daydream,slowcook,sober,silent
   { q: "有人对你表示好感，但聊了几次发现三观不太合。你会？", opts: [
@@ -308,7 +308,7 @@ const questions = [
     { text: "我也没办法啊，最近项目太忙了", scores: { money: 3, slowcook: 1 } },
     { text: "我觉得现在的节奏挺好的，各自有空间", scores: { roommate: 3, buddha: 1 } },
     { text: "对不起，我以后尽量多陪你", scores: { pleaser: 3, show: 1 } },
-    { text: "如果你觉得不够，那可能我们不太合适", scores: { cliff: 3, parent: 1 } }
+    { text: "嘴上不说，但心里默默记着，失望攒够了再说", scores: { cliff: 3, parent: 1 } }
   ]},
   // Q10 P:slowcook,daydream,detective,gym S:newbie,drama,alarm,money
   { q: "你暗恋一个人三个月了还没表白，最可能的原因是？", opts: [
@@ -407,7 +407,7 @@ const questions = [
   { q: "对象约好了周末见面，但临时说有事来不了。你会？", opts: [
     { text: "没关系，那我自己安排别的事", scores: { roommate: 3, vanish: 1 } },
     { text: "有点失望但不会说出来", scores: { silent: 3, cliff: 1 } },
-    { text: "很不开心，觉得TA不重视我", scores: { alarm: 3, slowcook: 1 } },
+    { text: "很不开心，忍不住发消息问TA到底什么事这么重要", scores: { alarm: 3, slowcook: 1 } },
     { text: "无所谓，正好约别的朋友", scores: { flirt: 3, buddha: 1 } }
   ]},
   // Q24 P:purist,vanish,newbie,pleaser S:daydream,roommate,slowcook,loop
@@ -532,7 +532,7 @@ const questions = [
   { q: "你和对象的恋爱日常，你最希望是哪种画风？", opts: [
     { text: "像老夫老妻一样自在舒服", scores: { slowcook: 3, newbie: 1 } },
     { text: "每天都像偶像剧一样甜", scores: { daydream: 3, rush: 1 } },
-    { text: "分分合合但最终还是在一起", scores: { loop: 3, pleaser: 1 } },
+    { text: "偶尔闹点小别扭，但很快就和好", scores: { loop: 3, pleaser: 1 } },
     { text: "每个纪念日都要发朋友圈记录", scores: { show: 3, drama: 1 } }
   ]},
   // Q41 P:gym,tsundere,alarm,detective S:sober,silent,parent,cliff
@@ -546,8 +546,8 @@ const questions = [
   { q: "对象跟你说'我今天遇到一个特别帅/美的人'。你会？", opts: [
     { text: "也跟TA分享我今天遇到的有趣的人", scores: { hunter: 3, drama: 1 } },
     { text: "无所谓，看看又不会少块肉", scores: { roommate: 3, sober: 1 } },
-    { text: "不说话，但表情已经说明了一切", scores: { silent: 3, vanish: 1 } },
-    { text: "笑着说'那你去找TA吧'，心里有点不舒服", scores: { pleaser: 3, rush: 1 } }
+    { text: "突然不想说话了，低头玩手机", scores: { silent: 3, vanish: 1 } },
+    { text: "笑着说'那你去找TA吧'，然后主动转移话题", scores: { pleaser: 3, rush: 1 } }
   ]},
   // === Round 8 (Q43-Q48) ===
   // Q43 P:rush,parent,show,sober S:alarm,pleaser,hunter,money
@@ -568,8 +568,8 @@ const questions = [
   { q: "对象视频通话时说困了想睡了。你会？", opts: [
     { text: "好的晚安，然后各自休息", scores: { roommate: 3, buddha: 1 } },
     { text: "再聊五分钟嘛，舍不得挂", scores: { flirt: 3, hunter: 1 } },
-    { text: "说晚安，然后发一段长长的晚安情话", scores: { drama: 3, daydream: 1 } },
-    { text: "叮嘱TA早点睡，然后一直等TA说已经睡了", scores: { alarm: 3, detective: 1 } }
+    { text: "叮嘱TA盖好被子别着凉，明天记得吃早餐", scores: { drama: 3, daydream: 1 } },
+    { text: "挂了之后忍不住回看刚才的聊天记录", scores: { alarm: 3, detective: 1 } }
   ]},
   // Q46 P:daydream,hunter,newbie,cliff S:drama,rush,slowcook,silent
   { q: "你发现对象偷偷给你存了一个很丑的备注名。你会？", opts: [
@@ -580,7 +580,7 @@ const questions = [
   ]},
   // Q47 P:ideal,money,loop,tsundere S:cliff,gym,rush,detective
   { q: "对象突然说'我觉得我配不上你'。你会？", opts: [
-    { text: "觉得TA说得有道理，开始重新审视这段关系", scores: { ideal: 3, cliff: 1 } },
+    { text: "安慰TA，但心里确实会想我们是不是真的合适", scores: { ideal: 3, cliff: 1 } },
     { text: "认真跟TA聊聊为什么会这么想", scores: { money: 3, gym: 1 } },
     { text: "心疼TA，赶紧安慰说我离不开你", scores: { loop: 3, rush: 1 } },
     { text: "说'确实'，然后看TA的反应", scores: { tsundere: 3, detective: 1 } }
@@ -588,7 +588,7 @@ const questions = [
   // Q48 P:buddha,silent,detective,slowcook S:flirt,cliff,alarm,purist
   { q: "对象约会时一直在夸别的情侣好甜。你会？", opts: [
     { text: "附和一下，然后继续吃东西", scores: { buddha: 3, flirt: 1 } },
-    { text: "不说话，但表情已经说明了一切", scores: { silent: 3, cliff: 1 } },
+    { text: "假装没听到，继续看菜单", scores: { silent: 3, cliff: 1 } },
     { text: "开始观察那对情侣，分析TA为什么觉得甜", scores: { detective: 3, alarm: 1 } },
     { text: "觉得我们也可以慢慢变成那样", scores: { slowcook: 3, purist: 1 } }
   ]},
@@ -605,7 +605,7 @@ const questions = [
     { text: "好的我以后注意，都听你的", scores: { pleaser: 3, parent: 1 } },
     { text: "那你倒是说啊，每次都是你先不理我", scores: { detective: 3, tsundere: 1 } },
     { text: "觉得说了也没用，该吵还是会吵", scores: { silent: 3, vanish: 1 } },
-    { text: "如果连沟通都做不到，那还有什么意义", scores: { cliff: 3, ideal: 1 } }
+    { text: "心里已经在想如果一直这样要不要算了", scores: { cliff: 3, ideal: 1 } }
   ]},
   // Q51 P:show,daydream,money,loop S:rush,purist,gym,alarm
   { q: "恋爱后你的手机相册里最多的是？", opts: [
@@ -661,8 +661,8 @@ const questions = [
   { q: "你和对象因为家务分配吵了起来。你会？", opts: [
     { text: "列个清单公平分配，用制度解决问题", scores: { sober: 3, gym: 1 } },
     { text: "连家务都谈不拢，以后怎么过日子", scores: { cliff: 3, silent: 1 } },
-    { text: "算了我全包了，只要TA开心就好", scores: { rush: 3, loop: 1 } },
-    { text: "帮TA把活都干了，顺便教TA怎么做", scores: { parent: 3, newbie: 1 } }
+    { text: "算了我全包了，只要别吵架就行", scores: { rush: 3, loop: 1 } },
+    { text: "一边帮TA做一边唠叨TA下次自己做", scores: { parent: 3, newbie: 1 } }
   ]},
   // Q59 P:buddha,ideal,alarm,flirt S:roommate,cliff,parent,hunter
   { q: "如果给你的恋爱态度选一个关键词，你会选？", opts: [
