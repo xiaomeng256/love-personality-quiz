@@ -59,6 +59,8 @@ body {
 }
 .option-btn:hover { background: #eef0ff; border-color: #667eea; transform: translateX(4px); }
 .option-btn:active { background: #667eea; color: white; border-color: #667eea; }
+.skip-btn { text-align: center; color: #aaa; border-color: #e8e8e8; background: #fafafa; font-size: 13px; }
+.skip-btn:hover { background: #f0f0f0; border-color: #ccc; color: #888; transform: none; }
 
 /* 结果页 - 卡片 */
 .result-container { max-width: 440px; width: 100%; text-align: center; }

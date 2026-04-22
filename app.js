@@ -35,6 +35,13 @@ function renderQuestion() {
     btn.onclick = () => selectOption(opt.scores);
     optionsEl.appendChild(btn);
   });
+
+  // 跳过按钮
+  const skipBtn = document.createElement('button');
+  skipBtn.className = 'option-btn skip-btn';
+  skipBtn.textContent = '⏭ 以上都不符合，跳过此题';
+  skipBtn.onclick = () => selectOption({});
+  optionsEl.appendChild(skipBtn);
   const card = document.getElementById('question-card');
   card.style.animation = 'none';
   card.offsetHeight;
