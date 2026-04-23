@@ -117,7 +117,6 @@ function copyShareLink() {
 }
 
 function saveCardImage() {
-  const card = document.getElementById('personality-card');
   const canvas = document.getElementById('share-canvas');
   const ctx = canvas.getContext('2d');
   const scale = 2;
@@ -126,15 +125,29 @@ function saveCardImage() {
   canvas.height = h * scale;
   ctx.scale(scale, scale);
 
-  // 获取当前人格数据
   const key = window.location.hash.replace('#result=', '');
   const p = personalities[key];
   if (!p) return;
 
+  // 兼容的圆角矩形
+  function roundRect(ctx, x, y, w, h, r) {
+    if (typeof r === 'number') r = [r, r, r, r];
+    ctx.beginPath();
+    ctx.moveTo(x + r[0], y);
+    ctx.lineTo(x + w - r[1], y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r[1]);
+    ctx.lineTo(x + w, y + h - r[2]);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r[2], y + h);
+    ctx.lineTo(x + r[3], y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r[3]);
+    ctx.lineTo(x, y + r[0]);
+    ctx.quadraticCurveTo(x, y, x + r[0], y);
+    ctx.closePath();
+  }
+
   // 背景
   ctx.fillStyle = '#fff';
-  ctx.beginPath();
-  ctx.roundRect(0, 0, w, h, 24);
+  roundRect(ctx, 0, 0, w, h, 24);
   ctx.fill();
 
   // 头部渐变
@@ -142,8 +155,7 @@ function saveCardImage() {
   grad.addColorStop(0, p.color[0]);
   grad.addColorStop(1, p.color[1]);
   ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.roundRect(0, 0, w, 180, [24, 24, 0, 0]);
+  roundRect(ctx, 0, 0, w, 180, [24, 24, 0, 0]);
   ctx.fill();
 
   // Emoji
@@ -159,8 +171,7 @@ function saveCardImage() {
   // 标签
   ctx.fillStyle = p.color[1];
   const tagW = ctx.measureText(p.subtitle).width + 24;
-  ctx.beginPath();
-  ctx.roundRect((w - tagW) / 2, 232, tagW, 26, 13);
+  roundRect(ctx, (w - tagW) / 2, 232, tagW, 26, 13);
   ctx.fill();
   ctx.fillStyle = '#fff';
   ctx.font = '13px "PingFang SC", "Microsoft YaHei", sans-serif';
@@ -200,11 +211,27 @@ function saveCardImage() {
   ctx.textAlign = 'center';
   ctx.fillText('恋爱人格测试', w / 2, h - 15);
 
-  // 下载
-  const link = document.createElement('a');
-  link.download = '恋爱人格-' + p.name + '.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+  // 下载 - 兼容方案
+  try {
+    canvas.toBlob(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.download = '恋爱人格-' + p.name + '.png';
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    }, 'image/png');
+  } catch(e) {
+    // fallback
+    var link = document.createElement('a');
+    link.download = '恋爱人格-' + p.name + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }
 
 function wrapText(ctx, text, x, y, maxW, lineH) {
